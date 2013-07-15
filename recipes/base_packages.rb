@@ -14,7 +14,9 @@ packages[:dev] = %w(
 packages[:scripting] = %w(
   daemontools
   disktype
+  openvpn
   pulseaudio-utils
+  pwgen
   stunnel4
 )
 
@@ -25,12 +27,18 @@ packages[:editors] = %w(
 packages[:desktop] = %w(
   arandr
   awesome
+  feh
+  flashplugin-installer
+  gimp
+  inkscape
   pavucontrol
   pcmanfm
   pidgin
   synaptic
   synergy
+  terminator
   xfce4-power-manager
+  xfce4-screenshooter
   zenity
 )
 
