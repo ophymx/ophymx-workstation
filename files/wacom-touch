@@ -1,0 +1,17 @@
+#!/bin/bash
+
+cmd="${1:-toggle}"
+device='Wacom Bamboo 2FG 6x8 Finger touch'
+state=$(xsetwacom get "$device" touch)
+
+case "$cmd" in
+  on)  xsetwacom set "$device" touch on  ;;
+  off) xsetwacom set "$device" touch off ;;
+  toggle)
+    case "$state" in
+      on)  $0 off ;;
+      off) $0 on  ;;
+    esac
+  ;;
+esac
+

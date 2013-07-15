@@ -1,0 +1,9 @@
+#!/bin/sh
+
+service=awesome
+enable_logging=true
+
+. ../common.sh
+
+export wpsetters=feh
+exec awesome

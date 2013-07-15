@@ -1,0 +1,58 @@
+#!/bin/bash
+
+cmd=$1
+device='/dev/input/powermate'
+evrouter_cmd="evrouter $device"
+
+wheel_mode(){
+  readlink ~/.evrouterrc | cut -d- -f2
+}
+
+wheel_state(){
+  pgrep -xf "$evrouter_cmd" > /dev/null
+  return $?
+}
+
+case "$cmd" in
+  start)
+    DISPLAY=:0.0
+    if [ ! -e "$device" ]; then
+      exit 2
+    fi
+    if ! wheel_state; then
+      if [ $(id -u) -eq '0' ]; then
+        su - abic -c "$evrouter_cmd"
+      else
+        $evrouter_cmd
+      fi
+      notify-send "wheel $(wheel_mode)"
+    fi
+    ;;
+  stop)  pkill -xf "$evrouter_cmd"
+    ;;
+  mode)  wheel_mode
+    ;;
+  state) wheel_state; exit $?
+    ;;
+  vol|volume)
+    if [ "$(wheel_mode)" != 'volume' ]; then
+      ln -sf .evrouterrc-volume ~/.evrouterrc
+      if wheel_state; then
+        $0 restart
+      fi
+    fi
+    ;;
+  scroll)
+    if [ "$(wheel_mode)" != 'scroll' ]; then
+      ln -sf .evrouterrc-scroll ~/.evrouterrc
+      if wheel_state; then
+        $0 restart
+      fi
+    fi
+    ;;
+  restart)
+    $0 stop
+    sleep 0.2
+    $0 start
+    ;;
+esac

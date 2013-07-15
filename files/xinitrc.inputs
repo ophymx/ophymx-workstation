@@ -1,0 +1,7 @@
+#!/bin/bash
+
+[ -f ~/.xmodmaprc ] && xmodmap ~/.xmodmaprc
+[ -f ~/.synclientrc ] && synclient $(cat ~/.synclientrc)
+
+wheel-ctrl start
+wacom-touch off

@@ -1,0 +1,15 @@
+#!/bin/sh
+
+logdir="$HOME/.log/svscan"
+mkdir -p "$logdir"
+
+exec 1>"$logdir/svscan.log" 2>"$logdir/svscan.err.log"
+echo $$ > ~/.sv/.svscan.pid
+
+$HOME/.xinitrc.inputs
+
+if ! ssh-add -l > /dev/null ; then
+  ssh-add &
+fi
+
+exec svscan ~/.sv/

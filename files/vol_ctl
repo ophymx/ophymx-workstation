@@ -1,0 +1,125 @@
+#!/bin/bash
+
+MAX_VOL=145
+
+get_sink(){
+  pacmd info|grep "Default sink name"|awk '{print $4}'
+}
+
+get_source(){
+  pacmd info|grep "Default source name"|awk '{print $4}'
+}
+
+get_volume(){
+  dev_type="${2:-sink}"
+  device="$1"
+  local line=
+  line=$(pacmd list-${dev_type}s|grep -n $device|sed '{s/://}'|awk '{print $1}')
+
+  # index down a bit for volume line
+  line=$(($line + 6))
+  pacmd list-${dev_type}s|awk 'NR=="'"$line"'"{print $3}'|sed '{s/%//}'
+}
+
+convert_volume(){
+  percent="$1"
+  expr $percent \* 65536 / 100
+}
+
+# raise volume by 5%
+vol_up(){
+  # Find default sink
+  sink=$(get_sink)
+  volume=$(get_volume $sink)
+  volume=$(( $volume + 5 ))
+  [[ $volume -gt $MAX_VOL ]] && let volume=$MAX_VOL
+  pacmd set-sink-volume $sink $(convert_volume $volume) > /dev/null 2>&1
+  notify "$volume%"
+}
+
+# lower volume by 5%
+vol_down(){
+  # Find default sink
+  sink=$(get_sink)
+  volume=$(get_volume $sink)
+  volume=$(( $volume - 5 ))
+  [[ $volume -lt 0 ]] && let volume=0
+  pacmd set-sink-volume $sink $(convert_volume $volume) > /dev/null 2>&1
+  notify "$volume%"
+}
+
+
+notify(){
+  mic=
+  if [[ "$1" == "-m" ]]; then
+    mic="mic "
+    shift
+  fi
+  msg="$1"
+  dbus-send --type=method_call --dest='org.freedesktop.Notifications' \
+    /org/freedesktop/Notifications org.freedesktop.Notifications.Notify \
+    string:'volume-notify' \
+    uint32:1 \
+    string:'' \
+    string:'' \
+    string:"${mic}volume $msg" \
+    array:string:'' \
+    dict:string:string:'','' \
+    int32:3000
+}
+
+mute_toggle(){
+  sink=$(get_sink)
+  local line=
+  line=$(pacmd list-sinks|grep -n $sink|sed '{s/://}'|awk '{print $1}')
+  # add 12 for "muted" line
+
+  line=$(($line + 12))
+
+  # extract mute status from that line
+  mute=$(pacmd list-sinks|awk 'NR==i"'"$line"'"{print $2}')
+
+  if [[ "$mute" == "yes" ]]; then
+    pacmd set-sink-mute "$sink" 0 > /dev/null 2>&1
+    notify "$(get_volume $sink)%"
+  elif [[ "$mute" == "no" ]]; then
+    pacmd set-sink-mute "$sink" 1 > /dev/null 2>&1
+    notify "muted"
+  fi
+}
+
+mute_mic_toggle(){
+  source=$(get_source)
+  local line=
+  line=$(pacmd list-sources|grep -n $source|sed '{s/://}'|awk '{print $1}')
+  # add 12 for "muted" line
+
+  line=$(($line + 12))
+
+  # extract mute status from that line
+  mute=$(pacmd list-sources|awk 'NR==i"'"$line"'"{print $2}')
+
+  if [[ "$mute" == "yes" ]]; then
+    pacmd set-source-mute "$source" 0 > /dev/null 2>&1
+    notify -m "$(get_volume "$source" source)%"
+  elif [[ "$mute" == "no" ]]; then
+    pacmd set-source-mute "$source" 1 > /dev/null 2>&1
+    notify -m "muted"
+  fi
+}
+cmd="$1"
+
+case "$cmd" in
+  d|down)
+    vol_down
+    ;;
+  u|up)
+    vol_up
+    ;;
+  m|mute)
+    mute_toggle
+    ;;
+  mm|micmute)
+    mute_mic_toggle
+    ;;
+esac

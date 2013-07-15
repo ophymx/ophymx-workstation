@@ -1,0 +1,55 @@
+#!/bin/bash
+
+if [ $# = 0 ]; then
+  action=$(zenity --list \
+                  --text "Awesome" \
+                  --column "Action" \
+                  Dock \
+                  Undock \
+                  Logoff \
+                  Shutdown \
+                  Restart \
+                  Suspend)
+else
+  action="$1"
+  if [ -z "$DISPLAY" ]; then
+    yN "Are you sure you wish to $action?" || exit 0
+  else
+    zenity --question --text="Are you sure you wish to $action?" || exit 0
+  fi
+fi
+
+
+case "$action" in
+  [Dd]ock)
+    dock
+    ;;
+  [Uu]ndock)
+    undock
+    ;;
+  [Ss]hutdown)
+    dbus-send --system --print-reply \
+      --dest="org.freedesktop.ConsoleKit" \
+      /org/freedesktop/ConsoleKit/Manager \
+      org.freedesktop.ConsoleKit.Manager.Stop
+    ;;
+  [Rr]estart)
+    dbus-send --system --print-reply \
+      --dest="org.freedesktop.ConsoleKit" \
+      /org/freedesktop/ConsoleKit/Manager \
+      org.freedesktop.ConsoleKit.Manager.Restart
+    ;;
+  [Ss]uspend)
+    dbus-send --system --print-reply \
+      --dest="org.freedesktop.UPower" \
+      /org/freedesktop/UPower \
+      org.freedesktop.UPower.Suspend
+    ;;
+  [Ll]og[Oo]ff)
+    services=$(ls -d ~/.sv/*)
+    svc -x -d $services
+    kill $(cat ~/.sv/.svscan.pid)
+    rm ~/.sv/.svscan.pid
+    ;;
+esac
+

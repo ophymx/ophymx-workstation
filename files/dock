@@ -1,0 +1,31 @@
+#!/bin/bash
+
+enable_external(){
+  xrandr --output HDMI2 --auto --primary --output LVDS1 --off
+  xrandr --output HDMI3 --auto --right-of HDMI2
+}
+
+disable_external(){
+  xrandr --output HDMI3 --off
+  xrandr --output LVDS1 --auto --primary --output HDMI2 --off
+}
+
+if [[ $(basename $0) == "dock" ]]; then
+  cmd=on
+elif [[ $(basename $0) == "undock" ]]; then
+  cmd=off
+else
+  :
+fi
+
+case "$cmd" in
+  on)
+    enable_external
+    $HOME/.xinitrc.inputs
+    ;;
+  off)
+    disable_external
+    ;;
+  *)
+    ;;
+esac

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+SYNERGY_DIR=$HOME/.synergy
+
+exec synergyc -f -d WARNING -1 -l $SYNERGY_DIR/log/synergyc localhost
