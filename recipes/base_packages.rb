@@ -2,7 +2,6 @@ packages = {}
 
 packages[:dev] = %w(
   build-essential
-  git
   libreadline-dev
   libssl-dev
   libxml2-dev
@@ -13,7 +12,6 @@ packages[:dev] = %w(
 )
 
 packages[:scripting] = %w(
-  curl
   daemontools
   pulseaudio-utils
 )
