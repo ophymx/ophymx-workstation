@@ -27,6 +27,10 @@ packages[:desktop] = %w(
   awesome
   pavucontrol
   zenity
+  xfce4-power-manager
+  synaptic
+  skype
+  pidgin
 )
 
 packages.values.flatten.uniq.compact.each do |package_name|
