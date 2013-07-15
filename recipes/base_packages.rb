@@ -13,7 +13,9 @@ packages[:dev] = %w(
 
 packages[:scripting] = %w(
   daemontools
+  disktype
   pulseaudio-utils
+  stunnel4
 )
 
 packages[:editors] = %w(
@@ -24,10 +26,12 @@ packages[:desktop] = %w(
   arandr
   awesome
   pavucontrol
-  zenity
-  xfce4-power-manager
-  synaptic
+  pcmanfm
   pidgin
+  synaptic
+  synergy
+  xfce4-power-manager
+  zenity
 )
 
 packages.values.flatten.uniq.compact.each do |package_name|
