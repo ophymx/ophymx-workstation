@@ -29,7 +29,6 @@ packages[:desktop] = %w(
   zenity
   xfce4-power-manager
   synaptic
-  skype
   pidgin
 )
 
