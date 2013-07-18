@@ -15,10 +15,12 @@ packages[:dev] = %w(
 packages[:scripting] = %w(
   daemontools
   disktype
+  gksu
   openvpn
   pulseaudio-utils
   pwgen
   stunnel4
+  svtools
 )
 
 packages[:editors] = %w(
@@ -32,6 +34,7 @@ packages[:desktop] = %w(
   flashplugin-installer
   gimp
   inkscape
+  parcellite
   pavucontrol
   pcmanfm
   pidgin
@@ -41,6 +44,7 @@ packages[:desktop] = %w(
   xfce4-power-manager
   xfce4-screenshooter
   zenity
+  xscreensaver
 )
 
 packages.values.flatten.uniq.compact.each do |package_name|

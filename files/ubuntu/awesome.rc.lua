@@ -15,7 +15,7 @@ beautiful.init("/usr/share/awesome/themes/zenburn/theme.lua")
 -- This is used later as the default terminal and editor to run.
 terminal = "terminator"
 browser = "google-chrome"
-browser_discreet = "google-chrome-incognito"
+browser_discreet = "google-chrome --incognito"
 file_manager = "pcmanfm"
 editor = os.getenv("EDITOR") or "vi"
 editor_cmd = terminal .. " -e " .. editor
