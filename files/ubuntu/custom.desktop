@@ -1,0 +1,6 @@
+[Desktop Entry] 
+Encoding=UTF-8
+Name=XSession
+Comment=User Defined Session
+TryExec=/etc/X11/Xsession
+Exec=/etc/X11/Xsession
