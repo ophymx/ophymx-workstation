@@ -4,6 +4,7 @@ package_source = 'http://files.vagrantup.com/packages/0219bb87725aac28a97c0e924c
 
 remote_file cache_file do
   source package_source
+  checksum '5bc0a620800'
 end
 
 package package_file do

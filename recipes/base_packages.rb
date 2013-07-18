@@ -2,6 +2,7 @@ packages = {}
 
 packages[:dev] = %w(
   build-essential
+  erlang
   libreadline-dev
   libssl-dev
   libxml2-dev
