@@ -2,7 +2,11 @@ include_recipe 'ophymx-workstation::default'
 
 include_recipe 'ophymx-workstation::user-session'
 
-config_files = %w(/usr/share/xsessions/custom.desktop /usr/share/X11/xorg.conf.d/11-evdev-rat5.conf)
+config_files = %w(
+  /etc/udev/rules.d/40-powermate.rules
+  /usr/share/xsessions/custom.desktop
+  /usr/share/X11/xorg.conf.d/11-evdev-rat5.conf
+)
 
 config_files.each do |config_file|
   cookbook_file config_file do

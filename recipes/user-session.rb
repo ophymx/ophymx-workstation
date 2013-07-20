@@ -51,7 +51,9 @@ user_configs = {
   'xscreensaver-resources' => '.xscreensaver-resources',
   'terminator.config' => '.config/terminator/config',
   'awesome.rc.lua' => '.config/awesome/rc.lua',
-  'sv/common.sh' => '.sv/common.sh'
+  'sv/common.sh' => '.sv/common.sh',
+  'evrouterrc-scroll' => '.evrouterrc-scroll',
+  'evrouterrc-volume' => '.evrouterrc-volume',
 }
 user_configs.each_pair do |src, dst|
   cookbook_file File.join(user_home, dst) do
