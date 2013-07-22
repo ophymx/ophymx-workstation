@@ -3,6 +3,11 @@ packages = {}
 packages[:dev] = %w(
   build-essential
   erlang
+  gir1.2-gee-1.0
+  gir1.2-glib-2.0
+  gobject-introspection
+  libgee-dev
+  libgirepository1.0-dev
   libreadline-dev
   libssl-dev
   libxml2-dev
@@ -33,6 +38,9 @@ packages[:desktop] = %w(
   feh
   flashplugin-installer
   gimp
+  gtk-chtheme
+  gtk-recordmydesktop
+  shimmer-themes
   inkscape
   parcellite
   pavucontrol
