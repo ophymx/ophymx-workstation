@@ -29,6 +29,7 @@ packages[:scripting] = %w(
 )
 
 packages[:editors] = %w(
+  links2
   vim-nox
 )
 
@@ -39,9 +40,10 @@ packages[:desktop] = %w(
   flashplugin-installer
   gimp
   gtk-chtheme
-  gtk-recordmydesktop
+  kazam
   shimmer-themes
   inkscape
+  openshot
   parcellite
   pavucontrol
   pcmanfm
