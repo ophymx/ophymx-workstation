@@ -1,6 +1,6 @@
 user_home = File.join('/home', node['ophymx']['user'])
 
-%w(.sv .config .config/terminator .config/awesome .config/gtk-3.0).each do |dir|
+%w(.sv .config .config/terminator .config/awesome .config/gtk-3.0 .vim .vim/ftdetect .vim/syntax).each do |dir|
   directory File.join(user_home, dir) do
     owner node['ophymx']['user']
     group node['ophymx']['group']
@@ -55,6 +55,22 @@ user_configs = {
   'evrouterrc-scroll' => '.evrouterrc-scroll',
   'evrouterrc-volume' => '.evrouterrc-volume',
   'gtk-3.0/settings.ini' => '.config/gtk-3.0/settings.ini',
+  'vimrc' => '.vimrc',
+  'vim/ftdetect/handlebars.vim' => '.vim/ftdetect/handlebars.vim',
+  'vim/ftdetect/vala.vim' => '.vim/ftdetect/vala.vim',
+  'vim/ftdetect/gtkaml.vim' => '.vim/ftdetect/gtkaml.vim',
+  'vim/ftdetect/coffee.vim' => '.vim/ftdetect/coffee.vim',
+  'vim/ftdetect/ragel.vim' => '.vim/ftdetect/ragel.vim',
+  'vim/ftdetect/markdown.vim' => '.vim/ftdetect/markdown.vim',
+  'vim/ftdetect/ruby_dsl_files.vim' => '.vim/ftdetect/ruby_dsl_files.vim',
+  'vim/syntax/gtkon.vim' => '.vim/syntax/gtkon.vim',
+  'vim/syntax/handlebars.vim' => '.vim/syntax/handlebars.vim',
+  'vim/syntax/vala.vim' => '.vim/syntax/vala.vim',
+  'vim/syntax/gtkaml.vim' => '.vim/syntax/gtkaml.vim',
+  'vim/syntax/genie.vim' => '.vim/syntax/genie.vim',
+  'vim/syntax/coffee.vim' => '.vim/syntax/coffee.vim',
+  'vim/syntax/ragel.vim' => '.vim/syntax/ragel.vim',
+  'vim/syntax/markdown.vim' => '.vim/syntax/markdown.vim'
 }
 user_configs.each_pair do |src, dst|
   cookbook_file File.join(user_home, dst) do
