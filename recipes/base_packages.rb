@@ -4,9 +4,12 @@ packages[:dev] = %w(
   build-essential
   erlang
   gir1.2-gee-1.0
+  gir1.2-gee-0.8
   gir1.2-glib-2.0
   gobject-introspection
+  libfcgi-dev
   libgee-dev
+  libgee-0.8-dev
   libgirepository1.0-dev
   libreadline-dev
   libssl-dev
