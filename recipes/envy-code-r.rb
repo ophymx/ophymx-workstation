@@ -4,7 +4,7 @@ envy_code_r_cache_file = File.join(Chef::Config[:file_cache_path], envy_code_r_f
 
 remote_file envy_code_r_cache_file do
   source envy_code_r_url
-  checksum '9f7e9703aaf2111'  
+  checksum '9f7e9703aaf2111'
 end
 
 directory '/usr/local/share/fonts'

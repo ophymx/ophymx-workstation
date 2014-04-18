@@ -6,4 +6,4 @@ apt_repository 'vala-team' do
   key '7DAAC99C'
 end
 
-package 'valac-0.20'
+package 'valac'
