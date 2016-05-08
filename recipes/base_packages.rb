@@ -6,7 +6,6 @@ packages[:vala_dev] = %w(
   gir1.2-glib-2.0
   gobject-introspection
   libfcgi-dev
-  libgee-dev
   libgee-0.8-dev
   libgirepository1.0-dev
   libreadline-dev
