@@ -5,6 +5,7 @@ if node['lsb']['release'] == '16.04'
     url 'https://dl.google.com/linux/direct/google-talkplugin_current_amd64.deb'
     checksum '9d878736e0c7a386dcd1abba237d28cfc76c44b933943cb6e9c0bcf10d5fa11d'
     action [:install]
+    notifies :delete, 'file[/etc/apt/sources.list.d/google-talkplugin.list]', :immediately
   end
 
   file '/etc/apt/sources.list.d/google-talkplugin.list' do
