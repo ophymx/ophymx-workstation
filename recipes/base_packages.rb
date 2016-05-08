@@ -1,9 +1,7 @@
 packages = {}
 
-packages[:dev] = %w(
+packages[:vala_dev] = %w(
   build-essential
-  erlang
-  gir1.2-gee-1.0
   gir1.2-gee-0.8
   gir1.2-glib-2.0
   gobject-introspection
