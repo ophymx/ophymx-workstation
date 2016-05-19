@@ -17,10 +17,11 @@
   synaptic
   synergy
   terminator
+  vlc
+  xscreensaver
   xfce4-power-manager
   xfce4-screenshooter
   zenity
-  xscreensaver
 ).each do |package_name|
   package package_name
 end
