@@ -1,5 +1,4 @@
 %w(
-  daemontools
   disktype
   gksu
   links2
@@ -7,7 +6,6 @@
   pulseaudio-utils
   pwgen
   stunnel4
-  svtools
   tree
   vim-nox
 ).each do |package_name|
