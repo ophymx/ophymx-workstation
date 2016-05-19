@@ -1,9 +1,0 @@
-#!/bin/sh
-
-service=update-notifier
-
-. ../common.sh
-
-depends_on awesome
-
-exec /usr/bin/update-notifier

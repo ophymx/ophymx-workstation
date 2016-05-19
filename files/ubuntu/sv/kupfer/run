@@ -1,8 +1,0 @@
-#!/bin/sh
-
-service=kupfer
-enable_logging=true
-
-. ../common.sh
-
-exec /usr/bin/kupfer --no-splash
