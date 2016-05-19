@@ -21,7 +21,7 @@ execute "tar -xzf #{ruby_install_cache_file}" do
   not_if(&check_ruby_install_version)
 end
 
-directory "/usr/local/ruby-install" do
+directory ruby_install_prefix do
   recursive true
   action :delete
   not_if(&check_ruby_install_version)
