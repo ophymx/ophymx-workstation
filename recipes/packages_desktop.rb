@@ -1,19 +1,19 @@
 %w(
+  apt-xapian-index
   arandr
   awesome
   feh
   flashplugin-installer
-  gimp
+  giggle
   gtk-chtheme
   kazam
   shimmer-themes
-  inkscape
-  openshot
   parcellite
   pavucontrol
   pcmanfm
   pidgin
   revelation
+  ssh-askpass-gnome
   synaptic
   synergy
   terminator
